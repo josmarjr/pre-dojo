@@ -1,6 +1,6 @@
 package br.com.amil.business;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -75,6 +75,26 @@ public class PlayerBusinessTest {
 		assertEquals("Ezequiel", match.getPlayers().get(0).getName());
 		assertEquals("Aldo", match.getPlayers().get(1).getName());
 		assertEquals("Bruno", match.getPlayers().get(2).getName());
+	}
+	
+	@Test
+	public void testIsUnstoppablePlayer() {
+		Match match = generateMatch();
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Aldo using AK47", match);
+		
+		assertTrue(playerBusiness.isUnstoppablePlayer(match.getPlayerByName("Bruno")));
+	}
+	
+	@Test
+	public void testIsNotUnstoppablePlayer() {
+		Match match = generateMatch();
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Ezequiel killed Bruno using AK47", match);
+		
+		assertFalse(playerBusiness.isUnstoppablePlayer(match.getPlayerByName("Bruno")));
 	}
 	
 	private Match generateMatch(){

@@ -10,6 +10,7 @@ import br.com.amil.utils.FileUtil;
 public class RankingBusiness {
 
 	MatchBusiness matchBusiness = new MatchBusiness();
+	PlayerBusiness playerBusiness = new PlayerBusiness();
 	
 	StringBuilder sb;
 	
@@ -36,9 +37,12 @@ public class RankingBusiness {
 	
 	private void printPlayers (Iterator<Player> players) {
 		while(players.hasNext()){
-			sb = new StringBuilder();
 			Player player = players.next();
-			System.out.println(sb.append(player.getName()).append("\t| Kills ").append(player.getKills()).append("\t| Deaths ").append(player.getDeaths()).append("\t| Max streak ").append(player.getMaxStreak()).toString());
+			StringBuilder playerScore = new StringBuilder();
+			playerScore.append(player.getName()).append("\t| Kills ").append(player.getKills()).append("\t| Deaths ").append(player.getDeaths()).append("\t| Max streak ").append(player.getMaxStreak());
+			if (playerBusiness.isUnstoppablePlayer(player))
+				playerScore.append("\t UNSTOPPABLE");
+			System.out.println(playerScore.toString());
 		}
 	}
 }

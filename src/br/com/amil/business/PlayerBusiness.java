@@ -35,6 +35,10 @@ public class PlayerBusiness {
 	    });
 	}
 	
+	public boolean isUnstoppablePlayer(Player player) {
+		return player.getDeaths() == 0;
+	}
+	
 	private PlayerHandle getOrCreatePlayer (String playerName, Match playerMatch){
 		Player player = playerMatch.getPlayerByName(playerName);
 		if (player == null){

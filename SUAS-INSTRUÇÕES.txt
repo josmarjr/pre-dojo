@@ -1,2 +1,4 @@
 Coloque aqui suas instruções ou comentários que ache útil/relevantes para possamos ler 
 quando estivermos avaliando a sua solução
+
+A classe de teste RankingBusinessTest executa as funções necessárias para que a solução apareça no log.
