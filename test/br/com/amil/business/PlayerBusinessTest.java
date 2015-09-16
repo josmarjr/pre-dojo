@@ -84,7 +84,7 @@ public class PlayerBusinessTest {
 		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
 		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Aldo using AK47", match);
 		
-		assertTrue(playerBusiness.isUnstoppablePlayer(match.getPlayerByName("Bruno")));
+		assertTrue(match.getPlayerByName("Bruno").isUnstoppablePlayer());
 	}
 	
 	@Test
@@ -94,7 +94,7 @@ public class PlayerBusinessTest {
 		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
 		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Ezequiel killed Bruno using AK47", match);
 		
-		assertFalse(playerBusiness.isUnstoppablePlayer(match.getPlayerByName("Bruno")));
+		assertFalse(match.getPlayerByName("Bruno").isUnstoppablePlayer());
 	}
 	
 	private Match generateMatch(){

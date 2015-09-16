@@ -66,6 +66,10 @@ public class Player {
 	public void setMaxStreak(Integer maxStreak) {
 		this.maxStreak = maxStreak;
 	}
+	
+	public boolean isUnstoppablePlayer() {
+		return this.deaths == 0;
+	}
 
 	public Weapon getWeaponByName (String name){
 		Iterator<Weapon> weaponsIterator = this.weapons.iterator();
