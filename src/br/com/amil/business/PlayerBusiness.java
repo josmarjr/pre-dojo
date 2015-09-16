@@ -64,6 +64,7 @@ public class PlayerBusiness {
 		public void withWeapon(String weaponName){
 			Weapon weapon = weaponBusiness.getOrCreateWeapon(weaponName, this.player);
 			weapon.setNumberOfKills(weapon.getNumberOfKills() +1);
+			weaponBusiness.sortWeaponsByKills(this.player.getWeapons());
 		}
 	}
 	
