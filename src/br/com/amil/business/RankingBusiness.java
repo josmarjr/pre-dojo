@@ -11,6 +11,8 @@ public class RankingBusiness {
 
 	MatchBusiness machBusiness = new MatchBusiness();
 	
+	StringBuilder sb;
+	
 	public void generateRanking(String logPath) {
 		machBusiness.createMatches(FileUtil.readFileRows(logPath));
 		printMatches(machBusiness.getMatches().iterator());
@@ -19,15 +21,17 @@ public class RankingBusiness {
 	private void printMatches (Iterator<Match> matches) {
 		while(matches.hasNext()){
 			Match match = matches.next();
-			System.out.println("Match number ".concat(match.getNameMatch().toString()));
+			sb = new StringBuilder();
+			System.out.println(sb.append("Match number ").append(match.getNameMatch()).toString());
 			printPlayers(match.getPlayers().iterator());
 		}
 	}
 	
 	private void printPlayers (Iterator<Player> players) {
 		while(players.hasNext()){
+			sb = new StringBuilder();
 			Player player = players.next();
-			System.out.println(player.getName().concat("\t| Kills ").concat(player.getKills().toString()).concat("\t| Deaths ").concat(player.getDeaths().toString()));
+			System.out.println(sb.append(player.getName()).append("\t| Kills ").append(player.getKills()).append("\t| Deaths ").append(player.getDeaths()).toString());
 		}
 	}
 }
