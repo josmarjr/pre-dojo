@@ -34,4 +34,31 @@ public class WeaponBusinessTest {
 		assertEquals(2, player.getWeapons().size());
 	}
 
+	@Test
+	public void testSortWeaponsByKills() {
+		Player player = new Player("José");
+
+		Weapon weapon = new Weapon("M16");
+		weapon.setNumberOfKills(2);
+		player.addWeapon(weapon);
+		
+		weapon = new Weapon("AK47");
+		weapon.setNumberOfKills(2);
+		player.addWeapon(weapon);
+		
+		weapon = new Weapon("Pistol");
+		weapon.setNumberOfKills(4);
+		player.addWeapon(weapon);
+		
+		weapon = new Weapon("Bomb");
+		weapon.setNumberOfKills(3);
+		player.addWeapon(weapon);
+		
+		weaponBusiness.sortWeaponsByKills(player.getWeapons());
+		
+		assertEquals("Pistol", player.getWeapons().get(0).getName());
+		assertEquals("Bomb", player.getWeapons().get(1).getName());
+		assertEquals("AK47", player.getWeapons().get(2).getName());
+		assertEquals("M16", player.getWeapons().get(3).getName());
+	}
 }
