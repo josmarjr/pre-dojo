@@ -31,14 +31,14 @@ public class RankingBusiness {
 	private void printWinnerWeapon(Match match) {
 		Player winner = match.getPlayers().get(0);
 		sb = new StringBuilder();
-		System.out.println(sb.append("Arma preferida de ").append(winner.getName()).append(": ").append(winner.getWeapons().get(0).getName()).toString());
+		System.out.println(sb.append("Favorite weapon of ").append(winner.getName()).append(": ").append(winner.getWeapons().get(0).getName()).toString());
 	}
 	
 	private void printPlayers (Iterator<Player> players) {
 		while(players.hasNext()){
 			sb = new StringBuilder();
 			Player player = players.next();
-			System.out.println(sb.append(player.getName()).append("\t| Kills ").append(player.getKills()).append("\t| Deaths ").append(player.getDeaths()).toString());
+			System.out.println(sb.append(player.getName()).append("\t| Kills ").append(player.getKills()).append("\t| Deaths ").append(player.getDeaths()).append("\t| Max streak ").append(player.getMaxStreak()).toString());
 		}
 	}
 }

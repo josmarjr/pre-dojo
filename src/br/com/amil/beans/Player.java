@@ -9,6 +9,8 @@ public class Player {
 	private String name;
 	private Integer kills = 0;
 	private Integer deaths = 0;
+	private Integer streak = 0;
+	private Integer maxStreak = 0;
 	private List<Weapon> weapons = new ArrayList<Weapon>();
 	
 	public Player (){}
@@ -49,6 +51,22 @@ public class Player {
 		this.weapons.add(weapon);
 	}
 	
+	public Integer getStreak() {
+		return streak;
+	}
+
+	public void setStreak(Integer streak) {
+		this.streak = streak;
+	}
+
+	public Integer getMaxStreak() {
+		return maxStreak;
+	}
+
+	public void setMaxStreak(Integer maxStreak) {
+		this.maxStreak = maxStreak;
+	}
+
 	public Weapon getWeaponByName (String name){
 		Iterator<Weapon> weaponsIterator = this.weapons.iterator();
 		while (weaponsIterator.hasNext()){

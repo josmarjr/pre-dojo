@@ -54,11 +54,15 @@ public class PlayerBusiness {
 		
 		public PlayerHandle addKill(){
 			this.player.setKills(this.player.getKills() + 1);
+			this.player.setStreak(this.player.getStreak() +1);
+			if (this.player.getStreak() > this.player.getMaxStreak())
+				this.player.setMaxStreak(this.player.getStreak());
 			return this;
 		}
 		
 		public void addDeath(){
 			this.player.setDeaths(this.player.getDeaths() + 1);
+			this.player.setStreak(0);
 		}
 		
 		public void withWeapon(String weaponName){

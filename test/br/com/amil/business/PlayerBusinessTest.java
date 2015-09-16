@@ -49,6 +49,21 @@ public class PlayerBusinessTest {
 	}
 	
 	@Test
+	public void testProcessPlayerLogStreak() {
+		Match match = generateMatch();
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:05 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:06 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:07 - Ezequiel killed Bruno using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:08 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:09 - Bruno killed Ezequiel using AK47", match);
+		
+		Player player = match.getPlayerByName("Bruno");
+		assertEquals(Integer.valueOf(3), player.getMaxStreak());
+		assertEquals(Integer.valueOf(2), player.getStreak());
+	}
+	
+	@Test
 	public void testSortPlayersByKills() {
 		Match match = generateMatch();
 		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
