@@ -1,10 +1,15 @@
 package br.com.amil.beans;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Player {
 
 	private String name;
 	private Integer kills = 0;
 	private Integer deaths = 0;
+	private List<Weapon> weapons = new ArrayList<Weapon>();
 	
 	public Player (){}
 	
@@ -36,11 +41,21 @@ public class Player {
 		this.deaths = deaths;
 	}
 	
-	public void addKill() {
-		this.kills++;
+	public List<Weapon> getWeapons() {
+		return weapons;
+	}
+
+	public void addWeapon(Weapon weapon) {
+		this.weapons.add(weapon);
 	}
 	
-	public void addDeath() {
-		this.deaths++;
+	public Weapon getWeaponByName (String name){
+		Iterator<Weapon> weaponsIterator = this.weapons.iterator();
+		while (weaponsIterator.hasNext()){
+			Weapon registeredWeapon = weaponsIterator.next();
+			if (registeredWeapon.getName().equals(name))
+				return registeredWeapon;
+		}
+		return null;
 	}
 }
