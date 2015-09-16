@@ -15,7 +15,7 @@ public class FileUtilTest {
 		String path = "test/br/com/amil/resources/pre-dojo.log";
 		List<String> rows = FileUtil.readFileRows(path);
 		assertNotNull(rows);
-		assertEquals(rows.size(), 4);
+		assertEquals(rows.size(), 42);
 	}
 	
 	@Test(expected = RuntimeException.class)
