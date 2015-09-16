@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileUtil {
 
-	public static List<String> readRowsFile (String path){
+	public static List<String> readFileRows (String path){
 		try {
 			FileReader fileReader = new FileReader(path);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
