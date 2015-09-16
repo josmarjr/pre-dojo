@@ -1,5 +1,9 @@
 package br.com.amil.business;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import br.com.amil.beans.Match;
 import br.com.amil.beans.Player;
 import br.com.amil.beans.Weapon;
@@ -14,6 +18,21 @@ public class PlayerBusiness {
 			getOrCreatePlayer(playerData[3], playerMatch).addKill().withWeapon(playerData[7]);
 		}
 		getOrCreatePlayer(playerData[5], playerMatch).addDeath();
+	}
+	
+	public void sortPlayersByKills(List<Player> players){
+		Collections.sort(players, new Comparator<Player>() {
+	        
+			@Override
+	        public int compare(Player firstPlayer, Player secondPlayer)
+	        {
+				if (secondPlayer.getKills().compareTo(firstPlayer.getKills()) != 0)
+					return  secondPlayer.getKills().compareTo(firstPlayer.getKills());
+				if (firstPlayer.getDeaths().compareTo(secondPlayer.getDeaths()) != 0)
+					return firstPlayer.getDeaths().compareTo(secondPlayer.getDeaths());
+				return firstPlayer.getName().compareTo(secondPlayer.getName());
+	        }
+	    });
 	}
 	
 	private PlayerHandle getOrCreatePlayer (String playerName, Match playerMatch){

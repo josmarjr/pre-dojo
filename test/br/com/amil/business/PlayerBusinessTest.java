@@ -48,6 +48,20 @@ public class PlayerBusinessTest {
 		assertEquals(Integer.valueOf(1), deadPlayer.getDeaths());
 	}
 	
+	@Test
+	public void testSortPlayersByKills() {
+		Match match = generateMatch();
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Ezequiel killed Bruno using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Aldo killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Ezequiel killed Aldo using AK47", match);
+		
+		playerBusiness.sortPlayersByKills(match.getPlayers());
+		assertEquals("Ezequiel", match.getPlayers().get(0).getName());
+		assertEquals("Aldo", match.getPlayers().get(1).getName());
+		assertEquals("Bruno", match.getPlayers().get(2).getName());
+	}
+	
 	private Match generateMatch(){
 		Match match = new Match("23/04/2013 15:34:22 - New match 1 has started");
 		match.addPlayer(new Player("João"));

@@ -9,13 +9,13 @@ import br.com.amil.utils.FileUtil;
 
 public class RankingBusiness {
 
-	MatchBusiness machBusiness = new MatchBusiness();
+	MatchBusiness matchBusiness = new MatchBusiness();
 	
 	StringBuilder sb;
 	
 	public void generateRanking(String logPath) {
-		machBusiness.createMatches(FileUtil.readFileRows(logPath));
-		printMatches(machBusiness.getMatches().iterator());
+		matchBusiness.createMatches(FileUtil.readFileRows(logPath));
+		printMatches(matchBusiness.getMatches().iterator());
 	}
 	
 	private void printMatches (Iterator<Match> matches) {

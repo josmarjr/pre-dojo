@@ -29,6 +29,7 @@ public class MatchBusiness {
 		while (((row = matchRows.next()).split(" ")).length > 7){
 			playerBusiness.processPlayerLog(row, activeMatch);
 		}
+		playerBusiness.sortPlayersByKills(activeMatch.getPlayers());
 	}
 	
 	public List<Match> getMatches (){
