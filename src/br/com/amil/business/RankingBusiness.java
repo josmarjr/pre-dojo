@@ -40,7 +40,9 @@ public class RankingBusiness {
 			StringBuilder playerScore = new StringBuilder();
 			playerScore.append(player.getName()).append("\t| Kills ").append(player.getKills()).append("\t| Deaths ").append(player.getDeaths()).append("\t| Max streak ").append(player.getMaxStreak());
 			if (player.isUnstoppablePlayer())
-				playerScore.append("\t UNSTOPPABLE");
+				playerScore.append("\t| UNSTOPPABLE");
+			if (player.isKillingSpree())
+				playerScore.append("\t| KILLING SPREE");
 			System.out.println(playerScore.toString());
 		}
 	}

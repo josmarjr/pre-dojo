@@ -1,6 +1,8 @@
 package br.com.amil.beans;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class Player {
 	private Integer streak = 0;
 	private Integer maxStreak = 0;
 	private List<Weapon> weapons = new ArrayList<Weapon>();
+	private List<Date> killsTimes = new ArrayList<Date>();
 	
 	public Player (){}
 	
@@ -69,6 +72,26 @@ public class Player {
 	
 	public boolean isUnstoppablePlayer() {
 		return this.deaths == 0;
+	}
+
+	public List<Date> getKillsTimes() {
+		return killsTimes;
+	}
+
+	public void addKillTime(Date killTime) {
+		this.killsTimes.add(killTime);
+	}
+	
+	
+	public boolean isKillingSpree() {
+		for (int i = 4 ; i < this.killsTimes.size() ; i ++){
+			Calendar priorDate = Calendar.getInstance();
+			priorDate.setTime(this.killsTimes.get(i-4));
+			priorDate.add(Calendar.MINUTE, 1);
+			if (!priorDate.getTime().before(this.killsTimes.get(i)))
+				return true;
+		}
+		return false;
 	}
 
 	public Weapon getWeaponByName (String name){

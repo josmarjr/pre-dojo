@@ -2,6 +2,9 @@ package br.com.amil.business;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.junit.Test;
 
 import br.com.amil.beans.Match;
@@ -61,6 +64,28 @@ public class PlayerBusinessTest {
 		Player player = match.getPlayerByName("Bruno");
 		assertEquals(Integer.valueOf(3), player.getMaxStreak());
 		assertEquals(Integer.valueOf(2), player.getStreak());
+	}
+	
+	@Test
+	public void testProcessPlayerLogKillDateTime() {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
+		Match match = generateMatch();
+		playerBusiness.processPlayerLog("23/04/2013 15:36:04 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:05 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:06 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:07 - Ezequiel killed Bruno using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:08 - Bruno killed Ezequiel using AK47", match);
+		playerBusiness.processPlayerLog("23/04/2013 15:36:09 - Bruno killed Ezequiel using AK47", match);
+		
+		Player player = match.getPlayerByName("Bruno");
+		assertEquals(5, player.getKillsTimes().size());
+		try {
+			assertEquals(formatter.parse("23/04/2013 15:36:05"), player.getKillsTimes().get(1));
+			assertNotEquals(formatter.parse("23/04/2013 15:36:05"), player.getKillsTimes().get(3));
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	@Test

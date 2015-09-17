@@ -1,9 +1,7 @@
 package br.com.amil.beans;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -16,7 +14,7 @@ public class MatchTest {
 	}
 	
 	@Test
-	public void testGetPlayerByNameNull() {
+	public void testGetPlayerByNameNotSuccess() {
 		Match match = generateMatch();
 		assertNull(match.getPlayerByName("Joaquim"));
 	}

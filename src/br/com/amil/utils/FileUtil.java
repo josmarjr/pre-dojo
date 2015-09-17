@@ -22,7 +22,7 @@ public class FileUtil {
 			
 			return rows;
 		} catch (IOException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 	

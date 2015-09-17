@@ -1,5 +1,7 @@
 package br.com.amil.business;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -15,7 +17,7 @@ public class PlayerBusiness {
 	public void processPlayerLog(String logRow, Match playerMatch){
 		String[] playerData = logRow.split(" ");
 		if (!playerData[3].equals("<WORLD>")){
-			getOrCreatePlayer(playerData[3], playerMatch).addKill().withWeapon(playerData[7]);
+			getOrCreatePlayer(playerData[3], playerMatch).addKill().withWeapon(playerData[7]).atTime(playerData[0], playerData[1]);
 		}
 		getOrCreatePlayer(playerData[5], playerMatch).addDeath();
 	}
@@ -65,10 +67,21 @@ public class PlayerBusiness {
 			this.player.setStreak(0);
 		}
 		
-		public void withWeapon(String weaponName){
+		public PlayerHandle withWeapon(String weaponName){
 			Weapon weapon = weaponBusiness.getOrCreateWeapon(weaponName, this.player);
 			weapon.setNumberOfKills(weapon.getNumberOfKills() +1);
 			weaponBusiness.sortWeaponsByKills(this.player.getWeapons());
+			return this;
+		}
+		
+		public void atTime(String killDate, String killTime){
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			try {
+				this.player.addKillTime(formatter.parse(killDate.concat(" ").concat(killTime)));
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+			
 		}
 	}
 	
