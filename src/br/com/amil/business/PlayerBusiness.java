@@ -37,24 +37,24 @@ public class PlayerBusiness {
 	    });
 	}
 	
-	private PlayerHandle getOrCreatePlayer (String playerName, Match playerMatch){
+	private PlayerHandler getOrCreatePlayer (String playerName, Match playerMatch){
 		Player player = playerMatch.getPlayerByName(playerName);
 		if (player == null){
 			player = new Player(playerName);
 			playerMatch.addPlayer(player);
 		}
-		return new PlayerHandle(player);
+		return new PlayerHandler(player);
 	}
 	
-	private class PlayerHandle{
+	private class PlayerHandler{
 		
 		Player player;
 		
-		public PlayerHandle(Player player){
+		public PlayerHandler(Player player){
 			this.player = player;
 		}
 		
-		public PlayerHandle addKill(){
+		public PlayerHandler addKill(){
 			this.player.setKills(this.player.getKills() + 1);
 			this.player.setStreak(this.player.getStreak() +1);
 			if (this.player.getStreak() > this.player.getMaxStreak())
@@ -67,7 +67,7 @@ public class PlayerBusiness {
 			this.player.setStreak(0);
 		}
 		
-		public PlayerHandle withWeapon(String weaponName){
+		public PlayerHandler withWeapon(String weaponName){
 			Weapon weapon = weaponBusiness.getOrCreateWeapon(weaponName, this.player);
 			weapon.setNumberOfKills(weapon.getNumberOfKills() +1);
 			weaponBusiness.sortWeaponsByKills(this.player.getWeapons());
